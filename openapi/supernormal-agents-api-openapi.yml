@@ -1,0 +1,187 @@
+openapi: 3.0.1
+info:
+  title: Supernormal Agent Sessions Agents API
+  description: Documentation for the Supernormal API
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://api.supernormal.com/api/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Agents
+  description: Operations about agents
+paths:
+  /agents:
+    get:
+      tags:
+      - Agents
+      summary: Get agents
+      description: Returns the current user's agents
+      security:
+      - ApiKeyAuth:
+        - agents:read
+      responses:
+        '200':
+          description: Agents response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+    post:
+      tags:
+      - Agents
+      summary: Create an agent
+      description: Creates an agent
+      security:
+      - ApiKeyAuth:
+        - agents:write
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRequest'
+      responses:
+        '200':
+          description: Agent response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+  /agents/{id}:
+    get:
+      tags:
+      - Agents
+      summary: Get an agent
+      description: Returns a single agent
+      security:
+      - ApiKeyAuth:
+        - agents:read
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the agent to get
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent'
+  /agents/{id}/publish:
+    post:
+      tags:
+      - Agents
+      summary: Publish an agent
+      security:
+      - ApiKeyAuth:
+        - agents:write
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the agent to publish
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent published
+  /agents/{id}/unpublish:
+    post:
+      tags:
+      - Agents
+      summary: Unpublish an agent
+      security:
+      - ApiKeyAuth:
+        - agents:write
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the agent to unpublish
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent unpublished
+components:
+  schemas:
+    Agent:
+      type: object
+      properties:
+        id:
+          description: The agent’s ID
+          type: string
+        name:
+          description: The agent’s name
+          type: string
+        avatar_url:
+          description: The agent’s avatar URL
+          type: string
+        description:
+          description: The agent’s description
+          type: string
+    AgentRequest:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Agent'
+      - type: object
+        properties:
+          actor_prompt:
+            type: string
+            description: The agent's actor prompt
+            enum:
+            - inbound_sales
+            - survey
+            - employee_satisfaction_survey
+            - customer_satisfaction_survey
+            - event_feedback_survey
+            - screening_interview
+          actor_voice:
+            type: string
+            description: The agent's actor voice
+            enum:
+            - archer
+            - christopher
+            - rachel
+            - scarlet
+          brand_color:
+            type: string
+            description: The agent's brand color
+          custom_prompt:
+            type: string
+            description: The agent's custom prompt
+          context:
+            type: string
+            description: The agent's context
+          greeting_prompt:
+            type: string
+            description: The agent's greeting prompt
+          goodbye_prompt:
+            type: string
+            description: The agent's goodbye prompt
+          is_host:
+            type: boolean
+            description: Whether the agent should speak first
+          mode:
+            type: string
+            description: The agent's speaking mode
+            enum:
+            - single_response
+            - conversation
+          max_call_duration:
+            type: integer
+            description: The agent's maximum call duration
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-TOKEN
+      x-scopes:
+        user:read: Read user information
+        calendar_events:read: Read calendar events
+        calendar_events:write: Write calendar events

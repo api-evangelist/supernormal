@@ -1,0 +1,160 @@
+openapi: 3.0.1
+info:
+  title: Supernormal Agent Sessions Posts API
+  description: Documentation for the Supernormal API
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://api.supernormal.com/api/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Posts
+  description: Operations about posts
+paths:
+  /posts:
+    get:
+      tags:
+      - Posts
+      summary: Get posts
+      description: Returns the current user's posts. Default limit is 20.
+      security:
+      - ApiKeyAuth:
+        - posts:read
+      parameters:
+      - name: limit
+        in: query
+        description: The number of posts to return. Default is 20. Max is 100
+        required: false
+        schema:
+          type: integer
+      - name: offset
+        in: query
+        description: The number of posts to skip. Default is 0
+        required: false
+        schema:
+          type: integer
+      - name: scope
+        in: query
+        description: Whether to return posts shared with the current caller or their own posts
+        required: false
+        schema:
+          type: string
+          enum:
+          - latest
+          - shared
+      responses:
+        '200':
+          description: Posts response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Post'
+  /posts/{id}:
+    get:
+      tags:
+      - Posts
+      summary: Get a post
+      description: Returns a single post
+      security:
+      - ApiKeyAuth:
+        - posts:read
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the post to get
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Post response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostDetail'
+components:
+  schemas:
+    Note:
+      type: object
+      properties:
+        id:
+          description: The note’s ID
+          type: string
+        body:
+          description: The note’s body
+          type: string
+        timestamp:
+          description: The note’s approximate transcript timestamp in seconds
+          type: number
+        parent_id:
+          description: The note’s parent ID. Present if the note is a child of another note
+          type: string
+        created_at:
+          description: The note’s created at time
+          type: string
+        display_name:
+          description: The note’s display name
+          type: string
+        type:
+          description: The note’s type
+          type: string
+    PostDetail:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Post'
+      - type: object
+        properties:
+          notes:
+            description: The post's notes
+            type: array
+            items:
+              $ref: '#/components/schemas/Note'
+          transcript:
+            description: The post's transcript
+            type: array
+            items:
+              $ref: '#/components/schemas/TranscriptSegment'
+    TranscriptSegment:
+      type: object
+      properties:
+        start:
+          description: The transcript’s start time
+          type: number
+        end:
+          description: The transcript’s end time
+          type: number
+        content:
+          description: The transcript’s content
+          type: string
+        author_name:
+          description: The transcript’s author name
+          type: string
+    Post:
+      type: object
+      properties:
+        id:
+          description: The post’s ID
+          type: string
+        title:
+          description: The post’s title
+          type: string
+        published_at:
+          description: The post’s published at time in ISO 8601 format
+          type: string
+        summary:
+          description: A brief description of the meeting
+          type: string
+        seen:
+          description: Whether the post has been seen by the current caller
+          type: boolean
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-TOKEN
+      x-scopes:
+        user:read: Read user information
+        calendar_events:read: Read calendar events
+        calendar_events:write: Write calendar events

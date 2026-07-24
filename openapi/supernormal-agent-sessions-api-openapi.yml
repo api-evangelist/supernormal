@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  title: Supernormal Agent Sessions API
+  description: Documentation for the Supernormal API
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://api.supernormal.com/api/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Agent Sessions
+paths:
+  /agent_sessions:
+    get:
+      tags:
+      - Agent Sessions
+      summary: Get agent sessions
+      description: Returns a given agent’s sessions
+      security:
+      - ApiKeyAuth:
+        - agent_sessions:read
+      parameters:
+      - name: agent_id
+        in: query
+        description: The ID of the agent to get sessions for
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent sessions response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSession'
+    post:
+      tags:
+      - Agent Sessions
+      summary: Create an agent session
+      security:
+      - ApiKeyAuth:
+        - agent_sessions:write
+      parameters:
+      - name: agent_id
+        in: query
+        description: The ID of the agent to create a session for
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: The name of the user initiating the session
+        required: false
+        schema:
+          type: string
+      - name: email
+        in: query
+        description: The email of the user initiating the session
+        required: false
+        schema:
+          type: string
+      - name: timezone
+        in: query
+        description: The timezone of the user initiating the session
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent session response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSession'
+  /agent_sessions/{id}:
+    get:
+      tags:
+      - Agent Sessions
+      summary: Get an agent session
+      security:
+      - ApiKeyAuth:
+        - agent_sessions:read
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the session to get
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent session response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentSession'
+components:
+  schemas:
+    AgentSession:
+      type: object
+      properties:
+        id:
+          description: The agent session’s ID
+          type: string
+        created_at:
+          description: The agent session’s created at time
+          type: string
+        duration:
+          description: The agent session’s duration
+          type: integer
+        started_at:
+          description: The agent session’s started at time
+          type: string
+        done_at:
+          description: The agent session’s done at time
+          type: string
+        meeting_url:
+          description: The agent session’s meeting URL
+          type: string
+        status:
+          description: The agent session’s status
+          type: string
+          enum:
+          - ready
+          - in_waiting_room
+          - joining_call
+          - in_call_ready
+          - in_call_not_recording
+          - in_call_recording
+          - call_ended
+          - done
+          - fatal
+          - join_request_denied
+          - timeout_exceeded
+          - create_error
+          - recording_too_short
+          - never_recorded
+          - preparing
+        metadata:
+          description: The agent session’s metadata
+          type: object
+        timezone:
+          description: The agent session’s timezone
+          type: string
+        transcription_complete:
+          description: Whether the agent session’s transcription is complete
+          type: boolean
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-TOKEN
+      x-scopes:
+        user:read: Read user information
+        calendar_events:read: Read calendar events
+        calendar_events:write: Write calendar events

@@ -1,0 +1,50 @@
+openapi: 3.0.1
+info:
+  title: Supernormal Agent Sessions Calendar Events API
+  description: Documentation for the Supernormal API
+  license:
+    name: MIT
+  version: 1.0.0
+servers:
+- url: https://api.supernormal.com/api/v1
+security:
+- ApiKeyAuth: []
+tags:
+- name: Calendar Events
+  description: Operations about calendar
+paths:
+  /calendar_events/{id}/record:
+    post:
+      tags:
+      - Calendar Events
+      summary: Toggle capture
+      description: Toggles whether a meeting should be captured
+      security:
+      - ApiKeyAuth:
+        - calendar_events:write
+      parameters:
+      - name: id
+        in: path
+        description: The ID of the calendar event to capture
+        required: true
+        schema:
+          type: string
+      - name: record
+        in: query
+        description: Whether to record video and audio from the meeting
+        required: true
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Meeting scheduled for capture
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-TOKEN
+      x-scopes:
+        user:read: Read user information
+        calendar_events:read: Read calendar events
+        calendar_events:write: Write calendar events
