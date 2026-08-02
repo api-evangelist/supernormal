@@ -1,0 +1,941 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Supernormal API",
+    "description": "Documentation for the Supernormal API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.supernormal.com/api/v1"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "tags": [
+    {
+      "name": "Agents",
+      "description": "Operations about agents"
+    },
+    {
+      "name": "Calendar Events",
+      "description": "Operations about calendar"
+    },
+    {
+      "name": "Posts",
+      "description": "Operations about posts"
+    },
+    {
+      "name": "Current User",
+      "description": "Operations about user"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "get": {
+        "tags": [
+          "Current User"
+        ],
+        "summary": "Get user",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "user:read"
+            ]
+          }
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "User response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/calendar_events": {
+      "get": {
+        "tags": [
+          "Current User"
+        ],
+        "summary": "Upcoming calendar events",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "calendar_events:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "The start date of the calendar events in ISO 8601 format",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "The end date of the calendar events in ISO 8601 format",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Calendar events response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CalendarEvent"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Get posts",
+        "description": "Returns the current user's posts. Default limit is 20.",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "posts:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of posts to return. Default is 20. Max is 100",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "The number of posts to skip. Default is 0",
+            "required": false,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "scope",
+            "in": "query",
+            "description": "Whether to return posts shared with the current caller or their own posts",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "latest",
+                "shared"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Posts response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Post"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "tags": [
+          "Posts"
+        ],
+        "summary": "Get a post",
+        "description": "Returns a single post",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "posts:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the post to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Post response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/calendar_events/{id}/record": {
+      "post": {
+        "tags": [
+          "Calendar Events"
+        ],
+        "summary": "Toggle capture",
+        "description": "Toggles whether a meeting should be captured",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "calendar_events:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the calendar event to capture",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "record",
+            "in": "query",
+            "description": "Whether to record video and audio from the meeting",
+            "required": true,
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meeting scheduled for capture"
+          }
+        }
+      }
+    },
+    "/agents": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get agents",
+        "description": "Returns the current user's agents",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agents:read"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agents response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agent"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Create an agent",
+        "description": "Creates an agent",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agents:write"
+            ]
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Agent response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{id}": {
+      "get": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Get an agent",
+        "description": "Returns a single agent",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agents:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the agent to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Agent"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agents/{id}/publish": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Publish an agent",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agents:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the agent to publish",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent published"
+          }
+        }
+      }
+    },
+    "/agents/{id}/unpublish": {
+      "post": {
+        "tags": [
+          "Agents"
+        ],
+        "summary": "Unpublish an agent",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agents:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the agent to unpublish",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent unpublished"
+          }
+        }
+      }
+    },
+    "/agent_sessions": {
+      "get": {
+        "tags": [
+          "Agent Sessions"
+        ],
+        "summary": "Get agent sessions",
+        "description": "Returns a given agent’s sessions",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agent_sessions:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "query",
+            "description": "The ID of the agent to get sessions for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent sessions response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSession"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Agent Sessions"
+        ],
+        "summary": "Create an agent session",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agent_sessions:write"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "agent_id",
+            "in": "query",
+            "description": "The ID of the agent to create a session for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "The name of the user initiating the session",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "email",
+            "in": "query",
+            "description": "The email of the user initiating the session",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timezone",
+            "in": "query",
+            "description": "The timezone of the user initiating the session",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent session response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSession"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent_sessions/{id}": {
+      "get": {
+        "tags": [
+          "Agent Sessions"
+        ],
+        "summary": "Get an agent session",
+        "security": [
+          {
+            "ApiKeyAuth": [
+              "agent_sessions:read"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The ID of the session to get",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Agent session response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentSession"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Agent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The agent’s ID",
+            "type": "string"
+          },
+          "name": {
+            "description": "The agent’s name",
+            "type": "string"
+          },
+          "avatar_url": {
+            "description": "The agent’s avatar URL",
+            "type": "string"
+          },
+          "description": {
+            "description": "The agent’s description",
+            "type": "string"
+          }
+        }
+      },
+      "AgentRequest": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Agent"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "actor_prompt": {
+                "type": "string",
+                "description": "The agent's actor prompt",
+                "enum": [
+                  "inbound_sales",
+                  "survey",
+                  "employee_satisfaction_survey",
+                  "customer_satisfaction_survey",
+                  "event_feedback_survey",
+                  "screening_interview"
+                ]
+              },
+              "actor_voice": {
+                "type": "string",
+                "description": "The agent's actor voice",
+                "enum": [
+                  "archer",
+                  "christopher",
+                  "rachel",
+                  "scarlet"
+                ]
+              },
+              "brand_color": {
+                "type": "string",
+                "description": "The agent's brand color"
+              },
+              "custom_prompt": {
+                "type": "string",
+                "description": "The agent's custom prompt"
+              },
+              "context": {
+                "type": "string",
+                "description": "The agent's context"
+              },
+              "greeting_prompt": {
+                "type": "string",
+                "description": "The agent's greeting prompt"
+              },
+              "goodbye_prompt": {
+                "type": "string",
+                "description": "The agent's goodbye prompt"
+              },
+              "is_host": {
+                "type": "boolean",
+                "description": "Whether the agent should speak first"
+              },
+              "mode": {
+                "type": "string",
+                "description": "The agent's speaking mode",
+                "enum": [
+                  "single_response",
+                  "conversation"
+                ]
+              },
+              "max_call_duration": {
+                "type": "integer",
+                "description": "The agent's maximum call duration"
+              }
+            }
+          }
+        ]
+      },
+      "AgentSession": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The agent session’s ID",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The agent session’s created at time",
+            "type": "string"
+          },
+          "duration": {
+            "description": "The agent session’s duration",
+            "type": "integer"
+          },
+          "started_at": {
+            "description": "The agent session’s started at time",
+            "type": "string"
+          },
+          "done_at": {
+            "description": "The agent session’s done at time",
+            "type": "string"
+          },
+          "meeting_url": {
+            "description": "The agent session’s meeting URL",
+            "type": "string"
+          },
+          "status": {
+            "description": "The agent session’s status",
+            "type": "string",
+            "enum": [
+              "ready",
+              "in_waiting_room",
+              "joining_call",
+              "in_call_ready",
+              "in_call_not_recording",
+              "in_call_recording",
+              "call_ended",
+              "done",
+              "fatal",
+              "join_request_denied",
+              "timeout_exceeded",
+              "create_error",
+              "recording_too_short",
+              "never_recorded",
+              "preparing"
+            ]
+          },
+          "metadata": {
+            "description": "The agent session’s metadata",
+            "type": "object"
+          },
+          "timezone": {
+            "description": "The agent session’s timezone",
+            "type": "string"
+          },
+          "transcription_complete": {
+            "description": "Whether the agent session’s transcription is complete",
+            "type": "boolean"
+          }
+        }
+      },
+      "CalendarEvent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The calendar event’s ID",
+            "type": "string"
+          },
+          "name": {
+            "description": "The calendar event’s name",
+            "type": "string"
+          },
+          "url": {
+            "description": "The calendar event’s URL",
+            "type": "string"
+          },
+          "post_id": {
+            "description": "The calendar event’s post ID",
+            "type": "string"
+          },
+          "is_recurring": {
+            "description": "Whether the calendar event is recurring",
+            "type": "boolean"
+          },
+          "is_blocked_from_capture": {
+            "description": "Whether the calendar event is blocked from capture",
+            "type": "boolean"
+          },
+          "start": {
+            "description": "The calendar event’s start time",
+            "type": "string"
+          },
+          "end": {
+            "description": "The calendar event’s end time",
+            "type": "string"
+          },
+          "platform_name": {
+            "description": "The calendar event’s platform name",
+            "type": "string",
+            "enum": [
+              "google_meet",
+              "teams",
+              "zoom"
+            ]
+          },
+          "scheduled_to_record": {
+            "description": "Whether the calendar event is scheduled to record",
+            "type": "boolean"
+          }
+        }
+      },
+      "Note": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The note’s ID",
+            "type": "string"
+          },
+          "body": {
+            "description": "The note’s body",
+            "type": "string"
+          },
+          "timestamp": {
+            "description": "The note’s approximate transcript timestamp in seconds",
+            "type": "number"
+          },
+          "parent_id": {
+            "description": "The note’s parent ID. Present if the note is a child of another note",
+            "type": "string"
+          },
+          "created_at": {
+            "description": "The note’s created at time",
+            "type": "string"
+          },
+          "display_name": {
+            "description": "The note’s display name",
+            "type": "string"
+          },
+          "type": {
+            "description": "The note’s type",
+            "type": "string"
+          }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The post’s ID",
+            "type": "string"
+          },
+          "title": {
+            "description": "The post’s title",
+            "type": "string"
+          },
+          "published_at": {
+            "description": "The post’s published at time in ISO 8601 format",
+            "type": "string"
+          },
+          "summary": {
+            "description": "A brief description of the meeting",
+            "type": "string"
+          },
+          "seen": {
+            "description": "Whether the post has been seen by the current caller",
+            "type": "boolean"
+          }
+        }
+      },
+      "PostDetail": {
+        "type": "object",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Post"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "notes": {
+                "description": "The post's notes",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Note"
+                }
+              },
+              "transcript": {
+                "description": "The post's transcript",
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TranscriptSegment"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "TranscriptSegment": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "description": "The transcript’s start time",
+            "type": "number"
+          },
+          "end": {
+            "description": "The transcript’s end time",
+            "type": "number"
+          },
+          "content": {
+            "description": "The transcript’s content",
+            "type": "string"
+          },
+          "author_name": {
+            "description": "The transcript’s author name",
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "The user’s ID",
+            "type": "string"
+          },
+          "first_name": {
+            "description": "The user’s first name",
+            "type": "string"
+          },
+          "last_name": {
+            "description": "The user’s last name",
+            "type": "string"
+          },
+          "email": {
+            "description": "The user’s email",
+            "type": "string"
+          },
+          "avatar_url": {
+            "description": "The user’s avatar URL",
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "required": [
+          "error",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-TOKEN",
+        "x-scopes": {
+          "user:read": "Read user information",
+          "calendar_events:read": "Read calendar events",
+          "calendar_events:write": "Write calendar events"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/supernormal-openapi-original.json
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.supernormal.com/api/v1
+  docs: https://docs.supernormal.com/api-reference/introduction
+status_page: https://supernormal.statuspage.io/
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation/sunset policy was found.
+sla:
+  url: null
+deprecated_operations: []
+notes: >-
+  The API is at v1 (version embedded in the URI path). Supernormal runs a public
+  Statuspage-hosted status page (supernormal.statuspage.io, title "Supernormal Status"). No
+  deprecation policy, Sunset/Deprecation header support, or SLA document was found, and no
+  operations are flagged deprecated in the OpenAPI.

@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+hosts:
+- host: https://api.supernormal.com
+  documents:
+  - path: /.well-known/oauth-authorization-server   # RFC 8414
+    status: 200
+    file: supernormal-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource      # RFC 9728
+    status: 200
+    file: supernormal-oauth-protected-resource.json
+  - path: /.well-known/oauth-protected-resource/mcp   # RFC 9728 (MCP resource)
+    status: 200
+    file: supernormal-oauth-protected-resource-mcp.json
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+- host: https://www.supernormal.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+content_signal:
+  source: https://supernormal.com/robots.txt
+  status: 200
+  directive: 'Content-Signal: ai-train=no, search=yes, ai-input=yes'
+  note: >-
+    robots.txt carries a Content-Signal AI-usage directive (opts out of AI training, permits
+    search indexing and ai-input). This is a real consent/identity signal.
+notes: >-
+  api.supernormal.com publishes a full OAuth 2.0 / MCP discovery surface: an RFC 8414
+  authorization-server document (authorize/token/revoke/register endpoints, PKCE S256,
+  dynamic client registration) and RFC 9728 protected-resource documents that point the
+  OAuth-protected MCP server (https://api.supernormal.com/mcp) at the authorization server.
+  No security.txt is published (app.supernormal.com/.well-known/security.txt returns the SPA
+  shell, not an RFC 9116 document, so it is not recorded as a security.txt).

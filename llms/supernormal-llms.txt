@@ -1,0 +1,13 @@
+# Supernormal API
+
+## Docs
+
+- [Get user](https://docs.supernormal.com/api-reference/current-user/get-user.md)
+- [Upcoming calendar events](https://docs.supernormal.com/api-reference/current-user/upcoming-calendar-events.md)
+- [Introduction](https://docs.supernormal.com/api-reference/introduction.md): Use Supernormal’s REST API to create custom integrations, or scripts.
+- [Get a post](https://docs.supernormal.com/api-reference/posts/get-a-post.md): Returns a single post
+- [Get posts](https://docs.supernormal.com/api-reference/posts/get-posts.md): Returns the current user's posts. Default limit is 20.
+
+## OpenAPI Specs
+
+- [openapi](https://docs.supernormal.com/api-reference/openapi.json)

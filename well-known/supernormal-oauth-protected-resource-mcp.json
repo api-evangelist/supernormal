@@ -1,0 +1,1 @@
+{"resource":"https://api.supernormal.com/mcp","authorization_servers":["https://api.supernormal.com"],"scopes_supported":["recordings:read","projects:read","projects:write"],"bearer_methods_supported":["header"]}

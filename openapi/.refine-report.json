@@ -1,0 +1,22 @@
+{
+  "provider": "supernormal",
+  "sources": [
+    "supernormal-agent-sessions-api-openapi.yml",
+    "supernormal-agents-api-openapi.yml",
+    "supernormal-calendar-events-api-openapi.yml",
+    "supernormal-current-user-api-openapi.yml",
+    "supernormal-posts-api-openapi.yml"
+  ],
+  "outputs": [
+    "supernormal-agent-sessions-api-openapi.yml",
+    "supernormal-agents-api-openapi.yml",
+    "supernormal-calendar-events-api-openapi.yml",
+    "supernormal-current-user-api-openapi.yml",
+    "supernormal-posts-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

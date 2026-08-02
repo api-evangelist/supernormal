@@ -1,0 +1,41 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Supernormal API
+  version: 1.0.0
+extends: openapi/supernormal-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-provider: supernormal
+    x-apievangelist-notes: >-
+      Enrichment overlay — non-destructive annotations layered over the provider's published
+      spec. Documents auth surfaces, MCP availability, and observed gaps without mutating the
+      original.
+- target: $.info
+  update:
+    x-auth-surfaces:
+      api_key:
+        header: X-API-TOKEN
+        scoped: true
+      oauth2:
+        authorization_server: https://api.supernormal.com/.well-known/oauth-authorization-server
+        pkce: S256
+        dynamic_client_registration: true
+    x-mcp-server:
+      url: https://api.supernormal.com/mcp
+      auth: oauth2-bearer
+      protected_resource_metadata: https://api.supernormal.com/.well-known/oauth-protected-resource/mcp
+- target: $.paths['/posts'].get
+  update:
+    x-pagination:
+      style: limit-offset
+      limit_default: 20
+      limit_max: 100
+- target: $.info
+  update:
+    x-gaps:
+    - No operationIds defined on operations (operationId absent throughout).
+    - Error responses enumerated only on GET /user; other operations document success only.
+    - Error schema is custom {error, message}, not RFC 9457 problem+json.
+    - No documented rate-limit headers or idempotency contract.

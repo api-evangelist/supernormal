@@ -1,0 +1,70 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/supernormal-openapi-original.json
+docs: https://docs.supernormal.com/api-reference/introduction
+notes: >-
+  Supernormal exposes two scope surfaces. (1) API-key (X-API-TOKEN) scopes selected when
+  minting a key in account settings and enforced per-operation in the REST API — the spec
+  declares user/calendar_events scopes in the securityScheme x-scopes map and references
+  additional posts/agents/agent_sessions scopes in operation security requirements. (2) The
+  OAuth 2.0 authorization server (used for the MCP server) advertises its own scopes_supported
+  in RFC 8414 metadata. Both are captured below.
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-TOKEN
+  source: openapi/supernormal-openapi-original.json
+- name: OAuth2
+  type: oauth2
+  flow: authorizationCode
+  authorizationUrl: https://api.supernormal.com/oauth/authorize
+  tokenUrl: https://api.supernormal.com/oauth/token
+  source: well-known/supernormal-oauth-authorization-server.json
+scopes:
+# --- API-key (X-API-TOKEN) scopes ---
+- scope: user:read
+  description: Read user information.
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+- scope: calendar_events:read
+  description: Read calendar events.
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+- scope: calendar_events:write
+  description: Write calendar events (toggle whether a meeting is captured).
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+- scope: posts:read
+  description: Read the current user's meeting posts, notes, and transcripts.
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+- scope: agents:read
+  description: Read the current user's AI agents.
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+- scope: agents:write
+  description: Create, publish, and unpublish AI agents.
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+- scope: agent_sessions:read
+  description: Read an agent's sessions.
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+- scope: agent_sessions:write
+  description: Create an agent session.
+  surface: api-key
+  sources: [openapi/supernormal-openapi-original.json]
+# --- OAuth 2.0 authorization-server scopes (MCP) ---
+- scope: recordings:read
+  description: Read meeting recordings (OAuth / MCP surface).
+  surface: oauth
+  sources: [well-known/supernormal-oauth-authorization-server.json]
+- scope: projects:read
+  description: Read projects (OAuth / MCP surface).
+  surface: oauth
+  sources: [well-known/supernormal-oauth-authorization-server.json]
+- scope: projects:write
+  description: Write projects (OAuth / MCP surface).
+  surface: oauth
+  sources: [well-known/supernormal-oauth-authorization-server.json]

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/supernormal-openapi-original.json
+note: >-
+  The published OpenAPI defines no operationIds; skill steps are grounded in the real
+  path+method+summary of each operation (verified present in the spec), never invented.
+skills:
+- file: supernormal-capture-a-meeting.md
+  name: Schedule a meeting for capture
+  api: openapi/supernormal-openapi-original.json
+  operations:
+  - GET /user/calendar_events
+  - POST /calendar_events/{id}/record
+- file: supernormal-retrieve-meeting-notes.md
+  name: Retrieve meeting notes and transcript
+  api: openapi/supernormal-openapi-original.json
+  operations:
+  - GET /posts
+  - GET /posts/{id}
+- file: supernormal-create-voice-agent.md
+  name: Create and run an AI voice agent
+  api: openapi/supernormal-openapi-original.json
+  operations:
+  - POST /agents
+  - POST /agents/{id}/publish
+  - POST /agent_sessions
+  - GET /agent_sessions/{id}

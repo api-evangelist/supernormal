@@ -1,0 +1,50 @@
+generated: '2026-07-21'
+method: searched
+status: published
+source: https://api.supernormal.com/.well-known/oauth-protected-resource/mcp
+server:
+  name: supernormal
+  transport: http
+  url: https://api.supernormal.com/mcp
+  auth:
+    type: oauth2
+    scheme: bearer
+    authorization_servers:
+    - https://api.supernormal.com
+    protected_resource_metadata: https://api.supernormal.com/.well-known/oauth-protected-resource/mcp
+    scopes_supported:
+    - recordings:read
+    - projects:read
+    - projects:write
+    pkce: S256
+    dynamic_client_registration: https://api.supernormal.com/oauth/register
+notes: >-
+  Supernormal publishes a remote, OAuth-protected Model Context Protocol server at
+  https://api.supernormal.com/mcp. An unauthenticated request returns HTTP 401 with a
+  WWW-Authenticate Bearer challenge advertising resource_metadata
+  (/.well-known/oauth-protected-resource/mcp), which points at the RFC 8414 authorization
+  server. Clients register dynamically (RFC 7591) and complete an authorization-code + PKCE
+  flow to obtain a bearer token scoped to recordings/projects. The tool list is not
+  enumerable without a token; the tools below are candidate mappings inferred from the public
+  REST API operations and the OAuth scopes (recordings/projects).
+tools:
+- name: get_user
+  description: Get the current user.
+  source_operation: openapi/supernormal-openapi-original.json#GET /user
+  status: candidate
+- name: list_upcoming_calendar_events
+  description: List upcoming calendar events.
+  source_operation: openapi/supernormal-openapi-original.json#GET /user/calendar_events
+  status: candidate
+- name: list_posts
+  description: List the current user's meeting posts.
+  source_operation: openapi/supernormal-openapi-original.json#GET /posts
+  status: candidate
+- name: get_post
+  description: Get a single meeting post with notes and transcript.
+  source_operation: openapi/supernormal-openapi-original.json#GET /posts/{id}
+  status: candidate
+- name: toggle_meeting_capture
+  description: Toggle whether a meeting should be captured.
+  source_operation: openapi/supernormal-openapi-original.json#POST /calendar_events/{id}/record
+  status: candidate

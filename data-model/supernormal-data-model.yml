@@ -1,0 +1,63 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/supernormal-openapi-original.json
+entities:
+- name: User
+  id_field: id
+  fields: [id, first_name, last_name, email, avatar_url]
+- name: CalendarEvent
+  id_field: id
+  fields: [id, name, url, post_id, is_recurring, is_blocked_from_capture, start, end, platform_name, scheduled_to_record]
+  platforms: [google_meet, teams, zoom]
+- name: Post
+  id_field: id
+  fields: [id, title, published_at, summary, seen]
+- name: PostDetail
+  extends: Post
+  fields: [notes, transcript]
+- name: Note
+  id_field: id
+  fields: [id, body, timestamp, parent_id, created_at, display_name, type]
+- name: TranscriptSegment
+  fields: [start, end, content, author_name]
+- name: Agent
+  id_field: id
+  fields: [id, name, avatar_url, description]
+- name: AgentRequest
+  extends: Agent
+  fields: [actor_prompt, actor_voice, brand_color, custom_prompt, context, greeting_prompt, goodbye_prompt, is_host, mode, max_call_duration]
+- name: AgentSession
+  id_field: id
+  fields: [id, created_at, duration, started_at, done_at, meeting_url, status, metadata, timezone, transcription_complete]
+relationships:
+- from: CalendarEvent
+  to: Post
+  type: has_one
+  via: post_id
+  note: A recorded calendar event produces a meeting post.
+- from: PostDetail
+  to: Note
+  type: has_many
+  via: notes
+- from: PostDetail
+  to: TranscriptSegment
+  type: has_many
+  via: transcript
+- from: Note
+  to: Note
+  type: belongs_to
+  via: parent_id
+  note: Notes can be nested (child notes reference a parent).
+- from: AgentSession
+  to: Agent
+  type: belongs_to
+  via: agent_id
+  note: Sessions are created for an agent (agent_id query parameter on /agent_sessions).
+- from: AgentRequest
+  to: Agent
+  type: extends
+  via: allOf
+notes: >-
+  Entity-relationship graph derived from OpenAPI component schemas ($ref links and
+  id-reference fields). Agent<->AgentSession relation is via the agent_id query parameter
+  rather than a body field.

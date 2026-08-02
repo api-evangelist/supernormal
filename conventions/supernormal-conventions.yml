@@ -1,0 +1,57 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/supernormal-openapi-original.json
+docs: https://docs.supernormal.com/api-reference/introduction
+authentication:
+  style: api-key
+  header: X-API-TOKEN
+  scoped: true
+  also: >-
+    OAuth 2.0 (authorization-code + PKCE, dynamic client registration) for the MCP surface —
+    see authentication/supernormal-authentication.yml
+content_type:
+  request: application/json
+  note: Send a Content-Type of application/json with all requests.
+base_url: https://api.supernormal.com/api/v1
+versioning:
+  scheme: uri-path
+  current: v1
+  note: Version is embedded in the base path (/api/v1). See lifecycle/supernormal-lifecycle.yml.
+pagination:
+  style: limit-offset
+  applies_to:
+  - GET /posts
+  params:
+    limit:
+      description: Number of posts to return. Default 20, max 100.
+      default: 20
+      max: 100
+    offset:
+      description: Number of posts to skip. Default 0.
+      default: 0
+  note: >-
+    Only the posts collection documents pagination parameters; other collection endpoints
+    (calendar events, agents, agent sessions) return arrays without documented paging.
+filtering:
+  - endpoint: GET /user/calendar_events
+    params: [from, to]
+    note: ISO 8601 date-range filter on upcoming calendar events.
+  - endpoint: GET /posts
+    params: [scope]
+    note: scope=latest|shared selects own vs shared posts.
+idempotency:
+  supported: false
+  note: >-
+    No idempotency-key header or parameter is documented; write operations (agent create,
+    publish/unpublish, session create, capture toggle) are not idempotent by contract.
+rate_limiting:
+  documented: false
+  note: No rate-limit headers or policy are documented in the API reference.
+error_envelope:
+  ref: errors/supernormal-problem-types.yml
+  shape: '{ "error": <int>, "message": <string> }'
+request_tracing:
+  documented: false
+notes: >-
+  Cross-cutting semantics derived from the published OpenAPI and the API introduction page.
+  Absence of idempotency and rate-limit documentation is recorded as-is, not fabricated.

@@ -1,8 +1,16 @@
 aid: supernormal
 name: supernormal
-description: supernormal is a company surfaced as a portfolio company of balderton-capital, eqt-ventures
-  and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the
-  enrichment pipeline.
+description: >-
+  Supernormal is an AI meeting assistant and AI-agents platform (backed by Balderton Capital
+  and EQT Ventures) that joins Google Meet, Zoom, and Microsoft Teams calls to capture,
+  transcribe, and summarize meetings into shareable notes with action items. Beyond meeting
+  notes, Supernormal offers configurable AI voice agents that can host or join calls, run
+  surveys and screening interviews, and produce transcripts and structured posts. Its public
+  REST API (https://api.supernormal.com/api/v1) exposes the current user, upcoming calendar
+  events, meeting posts with notes and transcripts, agents, and agent sessions, authenticated
+  with a scoped X-API-TOKEN API key. Supernormal additionally runs an OAuth 2.0 authorization
+  server with dynamic client registration and PKCE, and a published, OAuth-protected Model
+  Context Protocol (MCP) server so agents can access recordings and projects.
 url: https://raw.githubusercontent.com/api-evangelist/supernormal/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -11,17 +19,180 @@ x-backed-by:
 - eqt-ventures
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-apis: []
+- Meetings
+- Meeting Notes
+- Transcription
+- AI Agents
+- Voice Agents
+- Productivity
+- Collaboration
+- Model Context Protocol
+- REST API
+image: https://supernormal.com/og-card.png
+apis:
+- aid: supernormal:supernormal-agent-sessions-api
+  name: supernormal Agent Sessions API
+  description: The Agent Sessions API from supernormal — 2 operation(s) for agent sessions.
+  humanURL: https://docs.supernormal.com/api-reference/introduction
+  baseURL: https://api.supernormal.com/api/v1
+  tags:
+  - Agent Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/supernormal-agent-sessions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: Authentication
+    url: authentication/supernormal-authentication.yml
+  - type: OAuthScopes
+    url: scopes/supernormal-scopes.yml
+- aid: supernormal:supernormal-agents-api
+  name: supernormal Agents API
+  description: Operations about agents
+  humanURL: https://docs.supernormal.com/api-reference/introduction
+  baseURL: https://api.supernormal.com/api/v1
+  tags:
+  - Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/supernormal-agents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: Authentication
+    url: authentication/supernormal-authentication.yml
+  - type: OAuthScopes
+    url: scopes/supernormal-scopes.yml
+- aid: supernormal:supernormal-calendar-events-api
+  name: supernormal Calendar Events API
+  description: Operations about calendar
+  humanURL: https://docs.supernormal.com/api-reference/introduction
+  baseURL: https://api.supernormal.com/api/v1
+  tags:
+  - Calendar Events
+  properties:
+  - type: OpenAPI
+    url: openapi/supernormal-calendar-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: Authentication
+    url: authentication/supernormal-authentication.yml
+  - type: OAuthScopes
+    url: scopes/supernormal-scopes.yml
+- aid: supernormal:supernormal-current-user-api
+  name: supernormal Current User API
+  description: Operations about user
+  humanURL: https://docs.supernormal.com/api-reference/introduction
+  baseURL: https://api.supernormal.com/api/v1
+  tags:
+  - Current User
+  properties:
+  - type: OpenAPI
+    url: openapi/supernormal-current-user-api-openapi.yml
+  - type: Documentation
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: Authentication
+    url: authentication/supernormal-authentication.yml
+  - type: OAuthScopes
+    url: scopes/supernormal-scopes.yml
+- aid: supernormal:supernormal-posts-api
+  name: supernormal Posts API
+  description: Operations about posts
+  humanURL: https://docs.supernormal.com/api-reference/introduction
+  baseURL: https://api.supernormal.com/api/v1
+  tags:
+  - Posts
+  properties:
+  - type: OpenAPI
+    url: openapi/supernormal-posts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: APIReference
+    url: https://docs.supernormal.com/api-reference/introduction
+  - type: Authentication
+    url: authentication/supernormal-authentication.yml
+  - type: OAuthScopes
+    url: scopes/supernormal-scopes.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/supernormal-agentic-access.yml
 - type: Website
   url: https://supernormal.com/
+- type: DeveloperPortal
+  url: https://docs.supernormal.com/api-reference/introduction
+- type: Documentation
+  url: https://docs.supernormal.com/api-reference/introduction
+- type: APIReference
+  url: https://docs.supernormal.com/api-reference/introduction
+- type: GettingStarted
+  url: https://docs.supernormal.com/api-reference/introduction
+- type: SignUp
+  url: https://app.supernormal.com/settings
+- type: Support
+  url: https://help.supernormal.com/en/
+- type: HelpCenter
+  url: https://help.supernormal.com/en/
+- type: StatusPage
+  url: https://supernormal.statuspage.io/
+- type: LLMsTxt
+  url: llms/supernormal-llms.txt
+- type: MCPServer
+  url: mcp/supernormal-mcp.yml
+- type: WellKnown
+  url: well-known/supernormal-well-known.yml
+- type: ContentSignal
+  url: well-known/supernormal-well-known.yml
+- type: Authentication
+  url: authentication/supernormal-authentication.yml
+- type: OAuthScopes
+  url: scopes/supernormal-scopes.yml
+- type: ErrorCatalog
+  url: errors/supernormal-problem-types.yml
+- type: Conventions
+  url: conventions/supernormal-conventions.yml
+- type: Lifecycle
+  url: lifecycle/supernormal-lifecycle.yml
+- type: Conformance
+  url: conformance/supernormal-conformance.yml
+- type: DataModel
+  url: data-model/supernormal-data-model.yml
+- type: DomainSecurity
+  url: security/supernormal-domain-security.yml
+- type: Overlay
+  url: overlays/supernormal-openapi-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 21
+  pass: local-v1

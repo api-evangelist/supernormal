@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/supernormal-openapi-original.json
+docs: https://docs.supernormal.com/api-reference/introduction
+summary:
+  types:
+  - apiKey
+  - oauth2
+  api_key_in:
+  - header
+  oauth2_flows:
+  - authorizationCode
+notes: >-
+  The documented REST API (api.supernormal.com/api/v1) authenticates with a scoped API key
+  passed in the X-API-TOKEN header; keys are created in account settings
+  (https://app.supernormal.com/settings) and scoped to the minimum permissions needed.
+  Separately, Supernormal runs a full OAuth 2.0 authorization server (RFC 8414 metadata at
+  /.well-known/oauth-authorization-server) with authorization-code grant, refresh tokens,
+  PKCE (S256), and RFC 7591 dynamic client registration — used to authorize the OAuth-protected
+  MCP server (bearer token). The OAuth server advertises a different scope set
+  (recordings:read, projects:read, projects:write) than the API-key x-scopes.
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-TOKEN
+  sources:
+  - openapi/supernormal-openapi-original.json
+- name: OAuth2
+  type: oauth2
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://api.supernormal.com/oauth/authorize
+    tokenUrl: https://api.supernormal.com/oauth/token
+    revocationUrl: https://api.supernormal.com/oauth/revoke
+    registrationUrl: https://api.supernormal.com/oauth/register
+    pkce: S256
+    grant_types:
+    - authorization_code
+    - refresh_token
+  sources:
+  - well-known/supernormal-oauth-authorization-server.json

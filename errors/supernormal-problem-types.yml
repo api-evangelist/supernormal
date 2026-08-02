@@ -1,0 +1,29 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/supernormal-openapi-original.json
+format: custom-json
+envelope:
+  description: >-
+    Errors are returned as a JSON object with an integer `error` code and a human-readable
+    `message` string (components.schemas.Error; both fields required). This is NOT RFC 9457
+    problem+json.
+  fields:
+  - name: error
+    type: integer
+    description: Numeric error code.
+  - name: message
+    type: string
+    description: Human-readable error message.
+problems:
+- status: 400
+  title: Unexpected error
+  schema: Error
+  source_operation: openapi/supernormal-openapi-original.json#GET /user
+  remediation: >-
+    Verify the X-API-TOKEN header is present and valid, the key has the required scope for
+    the operation, and the Content-Type is application/json.
+notes: >-
+  Only the GET /user operation documents an explicit 400 error response in the OpenAPI; the
+  remaining operations declare success responses only. Auth failures (missing/invalid token,
+  insufficient scope) are expected to surface as 401/403 at runtime but are not enumerated in
+  the spec. This catalog is derived from the published spec and not fabricated beyond it.
