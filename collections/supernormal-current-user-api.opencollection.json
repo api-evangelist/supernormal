@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Supernormal Agent Sessions Current User API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-TOKEN",
+      "value": "{{X-API-TOKEN}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Current User",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.supernormal.com/api/v1/user",
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get user"
+        },
+        {
+          "info": {
+            "name": "Upcoming calendar events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.supernormal.com/api/v1/user/calendar_events",
+            "params": [
+              {
+                "name": "from",
+                "value": "",
+                "type": "query",
+                "description": "The start date of the calendar events in ISO 8601 format"
+              },
+              {
+                "name": "to",
+                "value": "",
+                "type": "query",
+                "description": "The end date of the calendar events in ISO 8601 format"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upcoming calendar events"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

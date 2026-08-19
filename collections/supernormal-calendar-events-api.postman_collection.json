@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "9bd835f0-8cbf-4f99-816a-f95aad1610b5",
+      "name": "Calendar Events",
+      "description": {
+        "content": "Operations about calendar",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3254b1c3-43c6-4768-8ee5-febd1a6373ac",
+          "name": "Toggle capture",
+          "request": {
+            "name": "Toggle capture",
+            "description": {
+              "content": "Toggles whether a meeting should be captured",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "calendar_events",
+                ":id",
+                "record"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "record",
+                  "value": "<boolean>",
+                  "description": "(Required) Whether to record video and audio from the meeting"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The ID of the calendar event to capture"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "X-API-TOKEN"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "90d255a0-2b1a-4059-8609-f460f15c5401",
+              "name": "Meeting scheduled for capture",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "calendar_events",
+                    ":id",
+                    "record"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "record",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The ID of the calendar event to capture"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-API-TOKEN",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.supernormal.com/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-API-TOKEN"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ef86f7c8-0ac5-4322-8043-777b42e7f104",
+    "name": "Supernormal Agent Sessions Calendar Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Documentation for the Supernormal API",
+      "type": "text/plain"
+    }
+  }
+}

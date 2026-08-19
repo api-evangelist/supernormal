@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Supernormal Agent Sessions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-TOKEN",
+      "value": "{{X-API-TOKEN}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Agent Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get agent sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.supernormal.com/api/v1/agent_sessions",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the agent to get sessions for"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a given agent’s sessions"
+        },
+        {
+          "info": {
+            "name": "Create an agent session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.supernormal.com/api/v1/agent_sessions",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "query",
+                "description": "The ID of the agent to create a session for"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "The name of the user initiating the session"
+              },
+              {
+                "name": "email",
+                "value": "",
+                "type": "query",
+                "description": "The email of the user initiating the session"
+              },
+              {
+                "name": "timezone",
+                "value": "",
+                "type": "query",
+                "description": "The timezone of the user initiating the session"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create an agent session"
+        },
+        {
+          "info": {
+            "name": "Get an agent session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.supernormal.com/api/v1/agent_sessions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the session to get"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get an agent session"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Supernormal Agent Sessions Calendar Events API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-TOKEN",
+      "value": "{{X-API-TOKEN}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Calendar Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Toggle capture",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.supernormal.com/api/v1/calendar_events/:id/record",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the calendar event to capture"
+              },
+              {
+                "name": "record",
+                "value": "",
+                "type": "query",
+                "description": "Whether to record video and audio from the meeting"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Toggles whether a meeting should be captured"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

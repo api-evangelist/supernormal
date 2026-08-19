@@ -1,0 +1,88 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Supernormal Agent Sessions Posts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-TOKEN",
+      "value": "{{X-API-TOKEN}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Posts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get posts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.supernormal.com/api/v1/posts",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of posts to return. Default is 20. Max is 100"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of posts to skip. Default is 0"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Whether to return posts shared with the current caller or their own posts"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns the current user's posts. Default limit is 20."
+        },
+        {
+          "info": {
+            "name": "Get a post",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.supernormal.com/api/v1/posts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the post to get"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-API-TOKEN",
+              "value": "{{X-API-TOKEN}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a single post"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
