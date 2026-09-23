@@ -1,0 +1,27 @@
+# Front Door AI Index — supernormal — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: supernormal
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: supernormal.com
+  final_host: www.supernormal.com
+  ownership: own
+  owner: supernormal
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 6
+  host_score: 6
+  density: 10.36
+  words: 579
+  tiers:
+    agentic: 1
+    core: 5
+    model: 0
+  ambiguous: 2
+  top_terms:
+    AI: 5
+    agent: 2
+    AI agent: 1

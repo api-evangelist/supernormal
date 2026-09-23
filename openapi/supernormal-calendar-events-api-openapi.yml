@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Supernormal Agent Sessions Calendar Events API
+  title: Supernormal Calendar Events API
   description: Documentation for the Supernormal API
   license:
     name: MIT
@@ -38,6 +38,8 @@ paths:
       responses:
         '200':
           description: Meeting scheduled for capture
+      operationId: postCalendarEventsByIdRecord
+      x-operation-id-source: derived
 components:
   securitySchemes:
     ApiKeyAuth:

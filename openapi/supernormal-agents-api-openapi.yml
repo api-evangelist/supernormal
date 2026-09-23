@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Supernormal Agent Sessions Agents API
+  title: Supernormal Agents API
   description: Documentation for the Supernormal API
   license:
     name: MIT
@@ -29,6 +29,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
+      operationId: getAgents
+      x-operation-id-source: derived
     post:
       tags:
       - Agents
@@ -49,6 +51,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
+      operationId: postAgents
+      x-operation-id-source: derived
   /agents/{id}:
     get:
       tags:
@@ -72,6 +76,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Agent'
+      operationId: getAgentsById
+      x-operation-id-source: derived
   /agents/{id}/publish:
     post:
       tags:
@@ -90,6 +96,8 @@ paths:
       responses:
         '200':
           description: Agent published
+      operationId: postAgentsByIdPublish
+      x-operation-id-source: derived
   /agents/{id}/unpublish:
     post:
       tags:
@@ -108,23 +116,10 @@ paths:
       responses:
         '200':
           description: Agent unpublished
+      operationId: postAgentsByIdUnpublish
+      x-operation-id-source: derived
 components:
   schemas:
-    Agent:
-      type: object
-      properties:
-        id:
-          description: The agent’s ID
-          type: string
-        name:
-          description: The agent’s name
-          type: string
-        avatar_url:
-          description: The agent’s avatar URL
-          type: string
-        description:
-          description: The agent’s description
-          type: string
     AgentRequest:
       type: object
       allOf:
@@ -176,6 +171,21 @@ components:
           max_call_duration:
             type: integer
             description: The agent's maximum call duration
+    Agent:
+      type: object
+      properties:
+        id:
+          description: The agent’s ID
+          type: string
+        name:
+          description: The agent’s name
+          type: string
+        avatar_url:
+          description: The agent’s avatar URL
+          type: string
+        description:
+          description: The agent’s description
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

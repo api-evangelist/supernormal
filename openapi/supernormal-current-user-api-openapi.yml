@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Supernormal Agent Sessions Current User API
+  title: Supernormal Current User API
   description: Documentation for the Supernormal API
   license:
     name: MIT
@@ -35,6 +35,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+      operationId: getUser
+      x-operation-id-source: derived
   /user/calendar_events:
     get:
       tags:
@@ -65,6 +67,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CalendarEvent'
+      operationId: getUserCalendarEvents
+      x-operation-id-source: derived
 components:
   schemas:
     User:
@@ -84,17 +88,6 @@ components:
           type: string
         avatar_url:
           description: The user’s avatar URL
-          type: string
-    Error:
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: integer
-          format: int32
-        message:
           type: string
     CalendarEvent:
       type: object
@@ -133,6 +126,17 @@ components:
         scheduled_to_record:
           description: Whether the calendar event is scheduled to record
           type: boolean
+    Error:
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: integer
+          format: int32
+        message:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

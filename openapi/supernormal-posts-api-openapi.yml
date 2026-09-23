@@ -1,6 +1,6 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Supernormal Agent Sessions Posts API
+  title: Supernormal Posts API
   description: Documentation for the Supernormal API
   license:
     name: MIT
@@ -51,6 +51,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Post'
+      operationId: getPosts
+      x-operation-id-source: derived
   /posts/{id}:
     get:
       tags:
@@ -74,32 +76,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PostDetail'
+      operationId: getPostsById
+      x-operation-id-source: derived
 components:
   schemas:
-    Note:
-      type: object
-      properties:
-        id:
-          description: The note’s ID
-          type: string
-        body:
-          description: The note’s body
-          type: string
-        timestamp:
-          description: The note’s approximate transcript timestamp in seconds
-          type: number
-        parent_id:
-          description: The note’s parent ID. Present if the note is a child of another note
-          type: string
-        created_at:
-          description: The note’s created at time
-          type: string
-        display_name:
-          description: The note’s display name
-          type: string
-        type:
-          description: The note’s type
-          type: string
     PostDetail:
       type: object
       allOf:
@@ -149,6 +129,30 @@ components:
         seen:
           description: Whether the post has been seen by the current caller
           type: boolean
+    Note:
+      type: object
+      properties:
+        id:
+          description: The note’s ID
+          type: string
+        body:
+          description: The note’s body
+          type: string
+        timestamp:
+          description: The note’s approximate transcript timestamp in seconds
+          type: number
+        parent_id:
+          description: The note’s parent ID. Present if the note is a child of another note
+          type: string
+        created_at:
+          description: The note’s created at time
+          type: string
+        display_name:
+          description: The note’s display name
+          type: string
+        type:
+          description: The note’s type
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

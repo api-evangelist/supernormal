@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Supernormal Agent Sessions API
   description: Documentation for the Supernormal API
@@ -35,6 +35,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentSession'
+      operationId: getAgentSessions
+      x-operation-id-source: derived
     post:
       tags:
       - Agent Sessions
@@ -74,6 +76,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentSession'
+      operationId: postAgentSessions
+      x-operation-id-source: derived
   /agent_sessions/{id}:
     get:
       tags:
@@ -96,6 +100,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AgentSession'
+      operationId: getAgentSessionsById
+      x-operation-id-source: derived
 components:
   schemas:
     AgentSession:
