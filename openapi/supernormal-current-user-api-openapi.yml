@@ -89,6 +89,17 @@ components:
         avatar_url:
           description: The user’s avatar URL
           type: string
+    Error:
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: integer
+          format: int32
+        message:
+          type: string
     CalendarEvent:
       type: object
       properties:
@@ -126,17 +137,6 @@ components:
         scheduled_to_record:
           description: Whether the calendar event is scheduled to record
           type: boolean
-    Error:
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: integer
-          format: int32
-        message:
-          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

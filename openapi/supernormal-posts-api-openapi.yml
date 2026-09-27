@@ -80,6 +80,21 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    TranscriptSegment:
+      type: object
+      properties:
+        start:
+          description: The transcript’s start time
+          type: number
+        end:
+          description: The transcript’s end time
+          type: number
+        content:
+          description: The transcript’s content
+          type: string
+        author_name:
+          description: The transcript’s author name
+          type: string
     PostDetail:
       type: object
       allOf:
@@ -96,21 +111,6 @@ components:
             type: array
             items:
               $ref: '#/components/schemas/TranscriptSegment'
-    TranscriptSegment:
-      type: object
-      properties:
-        start:
-          description: The transcript’s start time
-          type: number
-        end:
-          description: The transcript’s end time
-          type: number
-        content:
-          description: The transcript’s content
-          type: string
-        author_name:
-          description: The transcript’s author name
-          type: string
     Post:
       type: object
       properties:
