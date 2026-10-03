@@ -95,40 +95,6 @@ components:
         author_name:
           description: The transcript’s author name
           type: string
-    PostDetail:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Post'
-      - type: object
-        properties:
-          notes:
-            description: The post's notes
-            type: array
-            items:
-              $ref: '#/components/schemas/Note'
-          transcript:
-            description: The post's transcript
-            type: array
-            items:
-              $ref: '#/components/schemas/TranscriptSegment'
-    Post:
-      type: object
-      properties:
-        id:
-          description: The post’s ID
-          type: string
-        title:
-          description: The post’s title
-          type: string
-        published_at:
-          description: The post’s published at time in ISO 8601 format
-          type: string
-        summary:
-          description: A brief description of the meeting
-          type: string
-        seen:
-          description: Whether the post has been seen by the current caller
-          type: boolean
     Note:
       type: object
       properties:
@@ -153,6 +119,40 @@ components:
         type:
           description: The note’s type
           type: string
+    Post:
+      type: object
+      properties:
+        id:
+          description: The post’s ID
+          type: string
+        title:
+          description: The post’s title
+          type: string
+        published_at:
+          description: The post’s published at time in ISO 8601 format
+          type: string
+        summary:
+          description: A brief description of the meeting
+          type: string
+        seen:
+          description: Whether the post has been seen by the current caller
+          type: boolean
+    PostDetail:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Post'
+      - type: object
+        properties:
+          notes:
+            description: The post's notes
+            type: array
+            items:
+              $ref: '#/components/schemas/Note'
+          transcript:
+            description: The post's transcript
+            type: array
+            items:
+              $ref: '#/components/schemas/TranscriptSegment'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
