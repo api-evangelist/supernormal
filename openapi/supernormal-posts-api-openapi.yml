@@ -80,6 +80,24 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Post:
+      type: object
+      properties:
+        id:
+          description: The post’s ID
+          type: string
+        title:
+          description: The post’s title
+          type: string
+        published_at:
+          description: The post’s published at time in ISO 8601 format
+          type: string
+        summary:
+          description: A brief description of the meeting
+          type: string
+        seen:
+          description: Whether the post has been seen by the current caller
+          type: boolean
     TranscriptSegment:
       type: object
       properties:
@@ -119,24 +137,6 @@ components:
         type:
           description: The note’s type
           type: string
-    Post:
-      type: object
-      properties:
-        id:
-          description: The post’s ID
-          type: string
-        title:
-          description: The post’s title
-          type: string
-        published_at:
-          description: The post’s published at time in ISO 8601 format
-          type: string
-        summary:
-          description: A brief description of the meeting
-          type: string
-        seen:
-          description: Whether the post has been seen by the current caller
-          type: boolean
     PostDetail:
       type: object
       allOf:

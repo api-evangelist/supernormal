@@ -71,35 +71,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    User:
-      type: object
-      properties:
-        id:
-          description: The user’s ID
-          type: string
-        first_name:
-          description: The user’s first name
-          type: string
-        last_name:
-          description: The user’s last name
-          type: string
-        email:
-          description: The user’s email
-          type: string
-        avatar_url:
-          description: The user’s avatar URL
-          type: string
-    Error:
-      required:
-      - error
-      - message
-      type: object
-      properties:
-        error:
-          type: integer
-          format: int32
-        message:
-          type: string
     CalendarEvent:
       type: object
       properties:
@@ -137,6 +108,35 @@ components:
         scheduled_to_record:
           description: Whether the calendar event is scheduled to record
           type: boolean
+    User:
+      type: object
+      properties:
+        id:
+          description: The user’s ID
+          type: string
+        first_name:
+          description: The user’s first name
+          type: string
+        last_name:
+          description: The user’s last name
+          type: string
+        email:
+          description: The user’s email
+          type: string
+        avatar_url:
+          description: The user’s avatar URL
+          type: string
+    Error:
+      required:
+      - error
+      - message
+      type: object
+      properties:
+        error:
+          type: integer
+          format: int32
+        message:
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
