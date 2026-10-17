@@ -120,21 +120,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Agent:
-      type: object
-      properties:
-        id:
-          description: The agent’s ID
-          type: string
-        name:
-          description: The agent’s name
-          type: string
-        avatar_url:
-          description: The agent’s avatar URL
-          type: string
-        description:
-          description: The agent’s description
-          type: string
     AgentRequest:
       type: object
       allOf:
@@ -186,6 +171,21 @@ components:
           max_call_duration:
             type: integer
             description: The agent's maximum call duration
+    Agent:
+      type: object
+      properties:
+        id:
+          description: The agent’s ID
+          type: string
+        name:
+          description: The agent’s name
+          type: string
+        avatar_url:
+          description: The agent’s avatar URL
+          type: string
+        description:
+          description: The agent’s description
+          type: string
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

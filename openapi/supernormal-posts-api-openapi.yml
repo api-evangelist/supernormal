@@ -113,6 +113,22 @@ components:
         author_name:
           description: The transcript’s author name
           type: string
+    PostDetail:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/Post'
+      - type: object
+        properties:
+          notes:
+            description: The post's notes
+            type: array
+            items:
+              $ref: '#/components/schemas/Note'
+          transcript:
+            description: The post's transcript
+            type: array
+            items:
+              $ref: '#/components/schemas/TranscriptSegment'
     Note:
       type: object
       properties:
@@ -137,22 +153,6 @@ components:
         type:
           description: The note’s type
           type: string
-    PostDetail:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/Post'
-      - type: object
-        properties:
-          notes:
-            description: The post's notes
-            type: array
-            items:
-              $ref: '#/components/schemas/Note'
-          transcript:
-            description: The post's transcript
-            type: array
-            items:
-              $ref: '#/components/schemas/TranscriptSegment'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
