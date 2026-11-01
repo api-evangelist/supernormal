@@ -64,6 +64,131 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-supernormal is a company surfaced as a portfolio company of balderton-capital, eqt-ventures and added to the API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+Supernormal is an AI meeting assistant and AI-agents platform (backed by Balderton Capital and EQT Ventures) that joins Google Meet, Zoom, and Microsoft Teams calls to capture, transcribe, and summarize meetings into shareable notes with action items. Beyond meeting notes, Supernormal offers configurable AI voice agents that can host or join calls, run surveys and screening interviews, and produce transcripts and structured posts. Its public REST API (https://api.supernormal.com/api/v1) exposes the current user, upcoming calendar events, meeting posts with notes and transcripts, agents, and agent sessions, authenticated with a scoped X-API-TOKEN API key. Supernormal additionally runs an OAuth 2.0 authorization server with dynamic client registration and PKCE, and a published, OAuth-protected Model Context Protocol (MCP) server so agents can access recordings and projects.
 
-Backed by: balderton-capital, eqt-ventures — https://supernormal.com/
+**Areas:** Company · Meetings · Meeting Notes · Transcription · AI Agents · Voice Agents · Productivity · Collaboration · MCP · REST API
+
+## supernormal on APIs.io
+
+Everything profiled for supernormal is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/supernormal/](https://apis.io/providers/supernormal/)** — or go straight to one of the APIs or properties below.
+
+### APIs (5)
+
+- [supernormal Agent Sessions API](https://apis.io/apis/supernormal/supernormal-agent-sessions-api/) — The Agent Sessions API from supernormal — 2 operation(s) for agent sessions.
+- [supernormal Agents API](https://apis.io/apis/supernormal/supernormal-agents-api/) — Operations about agents
+- [supernormal Calendar Events API](https://apis.io/apis/supernormal/supernormal-calendar-events-api/) — Operations about calendar
+- [supernormal Current User API](https://apis.io/apis/supernormal/supernormal-current-user-api/) — Operations about user
+- [supernormal Posts API](https://apis.io/apis/supernormal/supernormal-posts-api/) — Operations about posts
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [supernormal](https://apis.io/servers/supernormal/supernormal/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Supernormal Agentic Access](https://apis.io/agentic-access/supernormal/supernormal-agentic-access/)
+
+#### Collections (5)
+
+Postman and Open Collection request collections.
+
+- [Supernormal Agent Sessions API](https://apis.io/collections/supernormal/open-supernormal-agent-sessions-api/)
+- [Supernormal Agent Sessions Agents API](https://apis.io/collections/supernormal/open-supernormal-agents-api/)
+- [Supernormal Agent Sessions Calendar Events API](https://apis.io/collections/supernormal/open-supernormal-calendar-events-api/)
+- [Supernormal Agent Sessions Current User API](https://apis.io/collections/supernormal/open-supernormal-current-user-api/)
+- [Supernormal Agent Sessions Posts API](https://apis.io/collections/supernormal/open-supernormal-posts-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Supernormal Openapi Overlay](https://apis.io/overlays/supernormal/supernormal-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Supernormal Authentication](https://apis.io/security/supernormal/supernormal-authentication/)
+- [Supernormal Domain Security](https://apis.io/security/supernormal/supernormal-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Supernormal Scopes](https://apis.io/scopes/supernormal/supernormal-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://supernormal.com/)
+- [Documentation](https://docs.supernormal.com/api-reference/introduction)
+- [Getting started](https://docs.supernormal.com/api-reference/introduction)
+- [API reference](https://docs.supernormal.com/api-reference/introduction)
+- [Sign up](https://app.supernormal.com/settings)
+- [Support](https://help.supernormal.com/en/)
+- [Blog](https://www.supernormal.com/blog)
+- [Status](https://supernormal.statuspage.io/)
+
+## API Evangelist rating
+
+**Kin Score 36.0** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 43.6 |
+| Contract governance | 4.5 |
+| Operational transparency | 15.8 |
+| Developer ergonomics | 58.9 |
+| Access clarity | 13.2 |
+
+**Agent readiness 45.4** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | derived (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | yes |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 26.5** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/supernormal/](https://apis.io/providers/supernormal/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for supernormal: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/supernormal/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
